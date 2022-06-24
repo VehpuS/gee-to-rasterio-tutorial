@@ -1,0 +1,8 @@
+dev-env
+__pycache__
+.ipynb_checkpoints
+.env
+.DS_Store
+.vi
+.vs
+*.tif
