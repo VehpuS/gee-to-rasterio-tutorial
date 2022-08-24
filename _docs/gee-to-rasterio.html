@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>gee-to-rasterio-tutorial - Google Earth Engine to Rasterio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="gee-to-rasterio-tutorial - Google Earth Engine to Rasterio">
+<meta property="og:description" content="Google earth engine combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities">
+<meta property="og:site-name" content="gee-to-rasterio-tutorial">
+<meta name="twitter:title" content="gee-to-rasterio-tutorial - Google Earth Engine to Rasterio">
+<meta name="twitter:description" content="Google earth engine combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">gee-to-rasterio-tutorial</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/VehpuS/gee-to-rasterio-tutorial"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Google Earth Engine to Rasterio</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Google Earth Engine to Rasterio</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gee-to-rasterio.html" class="sidebar-item-text sidebar-link active">Google Earth Engine to Rasterio</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setting-up-the-notebooks-environment" id="toc-setting-up-the-notebooks-environment" class="nav-link active" data-scroll-target="#setting-up-the-notebooks-environment">Setting up the notebook’s environment</a>
+  <ul class="collapse">
+  <li><a href="#python-dependencies" id="toc-python-dependencies" class="nav-link" data-scroll-target="#python-dependencies">Python dependencies</a></li>
+  <li><a href="#how-to-view-this-notebook-as-a-slide" id="toc-how-to-view-this-notebook-as-a-slide" class="nav-link" data-scroll-target="#how-to-view-this-notebook-as-a-slide">How to view this notebook as a slide</a>
+  <ul class="collapse">
+  <li><a href="#preview" id="toc-preview" class="nav-link" data-scroll-target="#preview">Preview</a></li>
+  <li><a href="#more-about-slideshows-in-jupyter" id="toc-more-about-slideshows-in-jupyter" class="nav-link" data-scroll-target="#more-about-slideshows-in-jupyter">More about slideshows in Jupyter</a></li>
+  </ul></li>
+  <li><a href="#in-code-diagrams" id="toc-in-code-diagrams" class="nav-link" data-scroll-target="#in-code-diagrams">In Code Diagrams</a>
+  <ul class="collapse">
+  <li><a href="#more-about-the-library" id="toc-more-about-the-library" class="nav-link" data-scroll-target="#more-about-the-library">More about the library</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#google-earth-engine" id="toc-google-earth-engine" class="nav-link" data-scroll-target="#google-earth-engine">Google Earth Engine</a></li>
+  <li><a href="#rasterio" id="toc-rasterio" class="nav-link" data-scroll-target="#rasterio">Rasterio</a></li>
+  <li><a href="#high-level---remote-sensing-pipeline" id="toc-high-level---remote-sensing-pipeline" class="nav-link" data-scroll-target="#high-level---remote-sensing-pipeline">High Level - Remote Sensing Pipeline</a>
+  <ul class="collapse">
+  <li><a href="#get-input-data" id="toc-get-input-data" class="nav-link" data-scroll-target="#get-input-data">1. Get input data</a>
+  <ul class="collapse">
+  <li><a href="#satellite-data" id="toc-satellite-data" class="nav-link" data-scroll-target="#satellite-data">Satellite Data</a></li>
+  <li><a href="#precomputed-data-from-previous-analysis-manual-or-ml-based" id="toc-precomputed-data-from-previous-analysis-manual-or-ml-based" class="nav-link" data-scroll-target="#precomputed-data-from-previous-analysis-manual-or-ml-based">Precomputed data from previous analysis (manual or ML based)</a></li>
+  <li><a href="#area-of-interest-shape" id="toc-area-of-interest-shape" class="nav-link" data-scroll-target="#area-of-interest-shape">Area of interest (shape)</a></li>
+  <li><a href="#uploaded-assets-images-shapes-tabular-data" id="toc-uploaded-assets-images-shapes-tabular-data" class="nav-link" data-scroll-target="#uploaded-assets-images-shapes-tabular-data">Uploaded Assets (images, shapes, tabular data)</a></li>
+  </ul></li>
+  <li><a href="#preprocess-input-data" id="toc-preprocess-input-data" class="nav-link" data-scroll-target="#preprocess-input-data">2. Preprocess input data</a>
+  <ul class="collapse">
+  <li><a href="#javascript-libraries" id="toc-javascript-libraries" class="nav-link" data-scroll-target="#javascript-libraries">Javascript Libraries</a></li>
+  <li><a href="#example-s2-preprocessing" id="toc-example-s2-preprocessing" class="nav-link" data-scroll-target="#example-s2-preprocessing">Example: S2 Preprocessing</a></li>
+  </ul></li>
+  <li><a href="#processing-on-google-cloud" id="toc-processing-on-google-cloud" class="nav-link" data-scroll-target="#processing-on-google-cloud">3. Processing on Google Cloud</a>
+  <ul class="collapse">
+  <li><a href="#example-supervised-classification" id="toc-example-supervised-classification" class="nav-link" data-scroll-target="#example-supervised-classification">Example: Supervised Classification</a></li>
+  </ul></li>
+  <li><a href="#ending-a-display-data-on-google-earth-engine" id="toc-ending-a-display-data-on-google-earth-engine" class="nav-link" data-scroll-target="#ending-a-display-data-on-google-earth-engine">Ending A: Display data on Google Earth Engine</a>
+  <ul class="collapse">
+  <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages">Advantages:</a></li>
+  <li><a href="#disadvantages" id="toc-disadvantages" class="nav-link" data-scroll-target="#disadvantages">Disadvantages:</a></li>
+  </ul></li>
+  <li><a href="#exporting-data" id="toc-exporting-data" class="nav-link" data-scroll-target="#exporting-data">4. Exporting data</a>
+  <ul class="collapse">
+  <li><a href="#example-code-to-handle-exports" id="toc-example-code-to-handle-exports" class="nav-link" data-scroll-target="#example-code-to-handle-exports">Example: Code to Handle Exports</a></li>
+  </ul></li>
+  <li><a href="#reading-cloud-images" id="toc-reading-cloud-images" class="nav-link" data-scroll-target="#reading-cloud-images">5. Reading Cloud Images</a>
+  <ul class="collapse">
+  <li><a href="#access-locally" id="toc-access-locally" class="nav-link" data-scroll-target="#access-locally">Access Locally</a></li>
+  <li><a href="#access-remotely" id="toc-access-remotely" class="nav-link" data-scroll-target="#access-remotely">Access Remotely</a></li>
+  <li><a href="#gdal-and-virtual-file-systems" id="toc-gdal-and-virtual-file-systems" class="nav-link" data-scroll-target="#gdal-and-virtual-file-systems">GDAL and Virtual File Systems</a></li>
+  <li><a href="#additional-read-methods" id="toc-additional-read-methods" class="nav-link" data-scroll-target="#additional-read-methods">Additional read methods</a></li>
+  </ul></li>
+  <li><a href="#ending-b-visualize-rasters" id="toc-ending-b-visualize-rasters" class="nav-link" data-scroll-target="#ending-b-visualize-rasters">Ending B: Visualize Rasters</a>
+  <ul class="collapse">
+  <li><a href="#serve-cogs-using-geoserver" id="toc-serve-cogs-using-geoserver" class="nav-link" data-scroll-target="#serve-cogs-using-geoserver">Serve COGs using GeoServer</a></li>
+  <li><a href="#serve-cogs-using-maptiler" id="toc-serve-cogs-using-maptiler" class="nav-link" data-scroll-target="#serve-cogs-using-maptiler">Serve COGs using MapTiler</a></li>
+  <li><a href="#custom-built-servers" id="toc-custom-built-servers" class="nav-link" data-scroll-target="#custom-built-servers">Custom Built Servers</a></li>
+  </ul></li>
+  <li><a href="#using-rasterio-for-raster-analysis" id="toc-using-rasterio-for-raster-analysis" class="nav-link" data-scroll-target="#using-rasterio-for-raster-analysis">5. Using Rasterio for Raster Analysis</a></li>
+  <li><a href="#ending-c-use-raster-data-as-input-for-further-computation" id="toc-ending-c-use-raster-data-as-input-for-further-computation" class="nav-link" data-scroll-target="#ending-c-use-raster-data-as-input-for-further-computation">Ending C: Use Raster Data as Input for Further Computation</a></li>
+  </ul></li>
+  <li><a href="#resources-tutorials" id="toc-resources-tutorials" class="nav-link" data-scroll-target="#resources-tutorials">Resources / Tutorials</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/VehpuS/gee-to-rasterio-tutorial/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Google Earth Engine to Rasterio</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="setting-up-the-notebooks-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-notebooks-environment">Setting up the notebook’s environment</h2>
+<section id="python-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="python-dependencies">Python dependencies</h3>
+<p>I recommend running in a virtual environment / colab.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-19T05:06:46.500154Z&quot;,&quot;start_time&quot;:&quot;2022-06-19T05:06:19.761839Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter_contrib_nbextensions</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install RISE</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install geemap</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install eemont</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install autopep8</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rasterio</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install blockdiagMagic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:31:46.083565Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:31:46.034283Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="how-to-view-this-notebook-as-a-slide" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-view-this-notebook-as-a-slide">How to view this notebook as a slide</h3>
+<p>Rerun jupyter notebook (via the web UI) after installing RISE, then you should see the following button, which opens the slideshow: <img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
+<section id="preview" class="level4">
+<h4 class="anchored" data-anchor-id="preview">Preview</h4>
+<video alt="Slides Preview" src="presentation-movie.mov" width="100%" autoplay="" controls="">
+</video></section>
+<section id="more-about-slideshows-in-jupyter" class="level4">
+<h4 class="anchored" data-anchor-id="more-about-slideshows-in-jupyter">More about slideshows in Jupyter</h4>
+<p><a href="https://towardsdatascience.com/5-slides-for-tips-on-presentation-mode-in-jupyter-notebook-f858b15fff4f#:~:text=The%20first%20step%20is%20to,Slideshow%20option%20and%20continue%20reading.&amp;text=Each%20cell%20in%20the%20Jupyter,in%20the%20upper%2Dright%20corner.">How to generate a slideshow from a notebook</a></p>
+<p><a href="https://rise.readthedocs.io/en/stable/">Adding Rise to be able to run slideshows from Jupyter</a></p>
+</section>
+</section>
+<section id="in-code-diagrams" class="level3">
+<h3 class="anchored" data-anchor-id="in-code-diagrams">In Code Diagrams</h3>
+<p>Diagrams should appear when Jupyter is run after the <code>blockdiagMagic</code> is installed.</p>
+<section id="more-about-the-library" class="level4">
+<h4 class="anchored" data-anchor-id="more-about-the-library">More about the library</h4>
+<p><a href="https://github.com/innovationOUtside/ipython_magic_blockdiag">Github repo</a></p>
+</section>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">Example</h4>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-08-24T13:43:26.847482Z&quot;,&quot;start_time&quot;:&quot;2022-08-24T13:43:26.833706Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-08-24T13:43:30.500954Z&quot;,&quot;start_time&quot;:&quot;2022-08-24T13:43:27.875869Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> C<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">-&gt;</span> D<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="gee-to-rasterio_files/figure-html/cell-6-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="google-earth-engine" class="level2">
+<h2 class="anchored" data-anchor-id="google-earth-engine">Google Earth Engine</h2>
+<p>Google earth engine combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:34:21.800621Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:33:24.581001Z&quot;}" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;fragment&quot;}" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee, eemont, geemap</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Authenticate and Initialize Earth Engine and geemap.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ee.Authenticate()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>ee.Initialize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p>To authorize access needed by Earth Engine, open the following
+        URL in a web browser and follow the instructions:</p>
+        <p><a href="https://code.earthengine.google.com/client-auth?scopes=https%3A//www.googleapis.com/auth/earthengine%20https%3A//www.googleapis.com/auth/devstorage.full_control&amp;request_id=VzhI2ZImWtee-_WBwKLsGe_uGSvjmYKaVjsxHnAtodg&amp;tc=mRtZEsxI7I_YDk82UJ_9Oh-Llg42nZhcKRQslmrj91k&amp;cc=HsMmRv6vzluxUaco-aqESQDftZYlV7k2kejDMMKUoGE">https://code.earthengine.google.com/client-auth?scopes=https%3A//www.googleapis.com/auth/earthengine%20https%3A//www.googleapis.com/auth/devstorage.full_control&amp;request_id=VzhI2ZImWtee-_WBwKLsGe_uGSvjmYKaVjsxHnAtodg&amp;tc=mRtZEsxI7I_YDk82UJ_9Oh-Llg42nZhcKRQslmrj91k&amp;cc=HsMmRv6vzluxUaco-aqESQDftZYlV7k2kejDMMKUoGE</a></p>
+        <p>The authorization workflow will generate a code, which you
+        should paste in the box below</p>
+        
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Enter verification code: 4/1AdQt8qhV8GB5g0cU6OgSj888f1-imZujyJEE_MHP8Hgi7k0knrCbjDJCrhk
+
+Successfully saved authorization token.</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:34:30.570884Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:34:29.598103Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example point of interest to filter the image collection.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> ee.Geometry.Point([<span class="op">-</span><span class="fl">75.92</span>, <span class="fl">2.86</span>])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get and filter the Sentinel-2 Surface Reflectance image collection and filter it by region and time.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> (ee.ImageCollection(<span class="st">'COPERNICUS/S2_SR'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      .filterDate(<span class="st">'2020-01-01'</span>,<span class="st">'2021-01-01'</span>).filterBounds(point))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cloud Probability masking is the default method to mask clouds and shadows in Sentinel-2 (method = 'cloud_prob'). By default, the Cloud Probability threshold is 60% (prob = 60).</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>S2c <span class="op">=</span> S2.maskClouds()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:37:40.351681Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:37:36.993589Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the visualization parameters.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rgbUnscaled <span class="op">=</span> {<span class="st">'min'</span>:<span class="dv">0</span>, <span class="st">'max'</span>:<span class="dv">3000</span>, <span class="st">'bands'</span>:[<span class="st">'B4'</span>,<span class="st">'B3'</span>,<span class="st">'B2'</span>]}</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use geemap to display results.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Map <span class="op">=</span> geemap.Map()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>Map.centerObject(point,<span class="dv">15</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Map.addLayer(S2c.median(),rgbUnscaled,<span class="st">'60% Cloud Probability masking'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>Map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"21f4ef76c4fa4b9ab000a9c061e0c928","version_major":2,"version_minor":0}
+</script>
+</div>
+</div>
+<p>In case of bad internet / viewing in a repo - here is what the map looks like <img src="gee-to-rasterio_files/figure-html/image-2.png" class="img-fluid" alt="image-2.png"></p>
+</section>
+<section id="rasterio" class="level2">
+<h2 class="anchored" data-anchor-id="rasterio">Rasterio</h2>
+<p>Rasterio reads and writes geospatial raster data.</p>
+<p>Geographic information systems use GeoTIFF and other formats to organize and store gridded, or raster, datasets. Rasterio reads and writes these formats and provides a Python API based on N-D arrays.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:37:59.454642Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:34:57.864063Z&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterio.plot <span class="im">import</span> show</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> rasterio.<span class="bu">open</span>(<span class="st">"https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif"</span>) <span class="im">as</span> src:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    show(src)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="gee-to-rasterio_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>In case of bad internet / viewing in a repo, here is what the output looks like: <img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
+</section>
+<section id="high-level---remote-sensing-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="high-level---remote-sensing-pipeline">High Level - Remote Sensing Pipeline</h2>
+<p>I’ll be giving the hight level data flow with small demonstrate in code - with the goal of providing an easy starting point to fill the “pipeline” with steps relevant to individual projects.</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-27T18:30:25.111598Z&quot;,&quot;start_time&quot;:&quot;2022-06-27T18:30:25.091041Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hide the input for the diagram after coding</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T21:48:56.210886Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T21:48:56.139561Z&quot;}" data-hide_input="true" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Get input data"</span> <span class="op">-&gt;</span> <span class="st">"Preprocess data"</span> <span class="op">-&gt;</span> <span class="st">"""Google Earth Engine</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">Processing"""</span> <span class="op">-&gt;</span> <span class="st">"Exporting data"</span> <span class="op">-&gt;</span> <span class="st">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Rasterio Raster Analysis"</span> <span class="op">-&gt;</span> <span class="st">"Further Computation"</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""Google Earth Engine</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">Processing"""</span> <span class="op">-&gt;</span> <span class="st">"""Display on Google Earth Engine"""</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Visualize Rasters"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="gee-to-rasterio_files/figure-html/cell-12-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T21:48:35.442254Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T21:48:35.387285Z&quot;}" data-hide_input="true" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Get input data"</span> <span class="op">-&gt;</span> <span class="st">"Preprocess data"</span> <span class="op">-&gt;</span> <span class="st">"""Google Earth Engine</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">Processing"""</span> <span class="op">-&gt;</span> <span class="st">"..."</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""Google Earth Engine</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">Processing"""</span> <span class="op">-&gt;</span> <span class="st">"""Display on Google Earth Engine"""</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="gee-to-rasterio_files/figure-html/cell-13-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T21:47:37.740242Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T21:47:37.689320Z&quot;}" data-hide_input="true" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Exporting data"</span> <span class="op">-&gt;</span> <span class="st">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Rasterio Raster Analysis"</span> <span class="op">-&gt;</span> <span class="st">"Further Computation"</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Visualize Rasters"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="gee-to-rasterio_files/figure-html/cell-14-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<section id="get-input-data" class="level3">
+<h3 class="anchored" data-anchor-id="get-input-data">1. Get input data</h3>
+<p>Google Earth Engine data catalog: https://developers.google.com/earth-engine/datasets</p>
+<p><strong>Note: Some data can be accessed using other providers / using other services, some is unique</strong></p>
+<section id="satellite-data" class="level4">
+<h4 class="anchored" data-anchor-id="satellite-data">Satellite Data</h4>
+<ul>
+<li>Sentinel (1, 2, 3) - 2 is used for current 10m res RGB, 1 for 10m res infrared</li>
+<li>Landsat (4, 5, 7. 8. 9) - 8 is widely used for historical data at 30m res</li>
+<li>High-Resolution Imagery</li>
+<li>Others satellites: MODIS, ALOS</li>
+</ul>
+<div style="display: flex; justify-content: space-around; align-items: center;">
+<p><img src="gee-to-rasterio_files/figure-html/image.png" width="30%"></p>
+</div>
+</section>
+<section id="precomputed-data-from-previous-analysis-manual-or-ml-based" class="level4">
+<h4 class="anchored" data-anchor-id="precomputed-data-from-previous-analysis-manual-or-ml-based">Precomputed data from previous analysis (manual or ML based)</h4>
+<ul>
+<li>Surface Temperature</li>
+<li>Climate</li>
+<li>Atmospheric</li>
+<li>Weather</li>
+<li>Elevation Data</li>
+<li>Land Use / Land Cover (LULC)</li>
+<li>More…</li>
+</ul>
+<div style="display: flex; justify-content: space-around; align-items: center;">
+<p><img src="gee-to-rasterio_files/figure-html/image.png" width="23%"> <img src="gee-to-rasterio_files/figure-html/image-2.png" width="23%"></p>
+</div>
+</section>
+<section id="area-of-interest-shape" class="level4">
+<h4 class="anchored" data-anchor-id="area-of-interest-shape">Area of interest (shape)</h4>
+<ul>
+<li>geopolitical border (country / state / city)</li>
+<li>crop boundaries (precomputed or derived)</li>
+<li>forest boundaries (precomputed or derived)</li>
+</ul>
+</section>
+<section id="uploaded-assets-images-shapes-tabular-data" class="level4">
+<h4 class="anchored" data-anchor-id="uploaded-assets-images-shapes-tabular-data">Uploaded Assets (images, shapes, tabular data)</h4>
+<ul>
+<li>via the <a href="https://code.earthengine.google.com">Google Earth Engine web interface</a>.</li>
+</ul>
+<div style="display: flex; justify-content: space-around; align-items: center;">
+<p><img src="gee-to-rasterio_files/figure-html/image.png" width="30%"></p>
+</div>
+</section>
+</section>
+<section id="preprocess-input-data" class="level3">
+<h3 class="anchored" data-anchor-id="preprocess-input-data">2. Preprocess input data</h3>
+<ul>
+<li>Filter images by geographical bounds and time range</li>
+<li>Clip images by shape (different than filtering).</li>
+<li>Cloud removal</li>
+<li>Calculate spectral indices (research based measures for various ecological phenomena)
+<ul>
+<li>Technically part of processing, but many spectral indices are so common they are often used as input features for additional analysis</li>
+<li>There are ready made libraries to calculate them: https://github.com/awesome-spectral-indices/spectral</li>
+</ul></li>
+<li>Calculate derived shapes if relevant</li>
+</ul>
+<section id="javascript-libraries" class="level4">
+<h4 class="anchored" data-anchor-id="javascript-libraries">Javascript Libraries</h4>
+<p>I focus on Python APIs in this presentation as they allow us to work with one programming language accross the pipeline, though Google Earth Engine has a language agnostic (REST) API, and an online coding environment using JavaScript (albeit with a slightly limited syntax) as it’s coding language, accessible via <a href="https://code.earthengine.google.com/">code.earthengine.google.com</a>.</p>
+<p>If you come accross useful code written in JavaScript, conversion isn’t too hard if you know both languages’ syntax (main challenges are anonymous functions and dictionary parameters changing into keyword parameters in Python). Google provides some support for converting code from JavaScript to Python, demonstrated <a href="https://github.com/giswqs/geemap/blob/master/examples/notebooks/15_convert_js_to_py.ipynb">in this notebook</a>.</p>
+</section>
+<section id="example-s2-preprocessing" class="level4">
+<h4 class="anchored" data-anchor-id="example-s2-preprocessing">Example: S2 Preprocessing</h4>
+<p>Based on <a href="https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless">this tutorial</a></p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T19:47:42.430706Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T19:47:42.364653Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>AOI <span class="op">=</span> ee.Geometry.Point([<span class="op">-</span><span class="fl">75.92</span>, <span class="fl">2.86</span>]).<span class="bu">buffer</span>(<span class="dv">100</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>START_DATE <span class="op">=</span> <span class="st">'2020-01-01'</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>END_DATE <span class="op">=</span> <span class="st">'2021-01-01'</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>CLOUD_FILTER <span class="op">=</span> <span class="dv">60</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>CLD_PRB_THRESH <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>NIR_DRK_THRESH <span class="op">=</span> <span class="fl">0.15</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>CLD_PRJ_DIST <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>BUFFER <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_cloud_bands(img):</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get s2cloudless image, subset the probability band.</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    cld_prb <span class="op">=</span> ee.Image(img.get(<span class="st">'s2cloudless'</span>)).select(<span class="st">'probability'</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Condition s2cloudless by the probability threshold value.</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    is_cloud <span class="op">=</span> cld_prb.gt(CLD_PRB_THRESH).rename(<span class="st">'clouds'</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the cloud probability layer and cloud mask as image bands.</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img.addBands(ee.Image([cld_prb, is_cloud]))</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_shadow_bands(img):</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Identify water pixels from the SCL band.</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    not_water <span class="op">=</span> img.select(<span class="st">'SCL'</span>).neq(<span class="dv">6</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Identify dark NIR pixels that are not water (potential cloud shadow pixels).</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    SR_BAND_SCALE <span class="op">=</span> <span class="fl">1e4</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    dark_pixels <span class="op">=</span> img.select(<span class="st">'B8'</span>).lt(</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        NIR_DRK_THRESH<span class="op">*</span>SR_BAND_SCALE).multiply(not_water).rename(<span class="st">'dark_pixels'</span>)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determine the direction to project cloud shadow from clouds (assumes UTM projection).</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    shadow_azimuth <span class="op">=</span> ee.Number(<span class="dv">90</span>).subtract(</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>        ee.Number(img.get(<span class="st">'MEAN_SOLAR_AZIMUTH_ANGLE'</span>)))</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Project shadows from clouds for the distance specified by the CLD_PRJ_DIST input.</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    cld_proj <span class="op">=</span> (img.select(<span class="st">'clouds'</span>).directionalDistanceTransform(shadow_azimuth, CLD_PRJ_DIST<span class="op">*</span><span class="dv">10</span>)</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>                .reproject(<span class="op">**</span>{<span class="st">'crs'</span>: img.select(<span class="dv">0</span>).projection(), <span class="st">'scale'</span>: <span class="dv">100</span>})</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>                .select(<span class="st">'distance'</span>)</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>                .mask()</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>                .rename(<span class="st">'cloud_transform'</span>))</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Identify the intersection of dark pixels with cloud shadow projection.</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    shadows <span class="op">=</span> cld_proj.multiply(dark_pixels).rename(<span class="st">'shadows'</span>)</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add dark pixels, cloud projection, and identified shadows as image bands.</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img.addBands(ee.Image([dark_pixels, cld_proj, shadows]))</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_s2_sr_cld_col(aoi, start_date, end_date):</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Import and filter S2 SR.</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>    s2_sr_col <span class="op">=</span> (ee.ImageCollection(<span class="st">'COPERNICUS/S2_SR'</span>)</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>                 .filterBounds(aoi)</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>                 .filterDate(start_date, end_date)</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>                 .<span class="bu">filter</span>(ee.Filter.lte(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span>, CLOUD_FILTER)))</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Import and filter s2cloudless.</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>    s2_cloudless_col <span class="op">=</span> (ee.ImageCollection(<span class="st">'COPERNICUS/S2_CLOUD_PROBABILITY'</span>)</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>                        .filterBounds(aoi)</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>                        .filterDate(start_date, end_date))</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Join the filtered s2cloudless collection to the SR collection by the 'system:index' property.</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ee.ImageCollection(ee.Join.saveFirst(<span class="st">'s2cloudless'</span>).<span class="bu">apply</span>(<span class="op">**</span>{</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'primary'</span>: s2_sr_col,</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'secondary'</span>: s2_cloudless_col,</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'condition'</span>: ee.Filter.equals(<span class="op">**</span>{</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>            <span class="st">'leftField'</span>: <span class="st">'system:index'</span>,</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>            <span class="st">'rightField'</span>: <span class="st">'system:index'</span></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>    }))</span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_cld_shdw_mask(img):</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add cloud component bands.</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>    img_cloud <span class="op">=</span> add_cloud_bands(img)</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add cloud shadow component bands.</span></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>    img_cloud_shadow <span class="op">=</span> add_shadow_bands(img_cloud)</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine cloud and shadow mask, set cloud and shadow as value 1, else 0.</span></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>    is_cld_shdw <span class="op">=</span> img_cloud_shadow.select(<span class="st">'clouds'</span>).add(</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>        img_cloud_shadow.select(<span class="st">'shadows'</span>)).gt(<span class="dv">0</span>)</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove small cloud-shadow patches and dilate remaining pixels by BUFFER input.</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 20 m scale is for speed, and assumes clouds don't require 10 m precision.</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>    is_cld_shdw <span class="op">=</span> (is_cld_shdw.focalMin(<span class="dv">2</span>).focalMax(BUFFER<span class="op">*</span><span class="dv">2</span><span class="op">/</span><span class="dv">20</span>)</span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>                   .reproject(<span class="op">**</span>{<span class="st">'crs'</span>: img.select([<span class="dv">0</span>]).projection(), <span class="st">'scale'</span>: <span class="dv">20</span>})</span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>                   .rename(<span class="st">'cloudmask'</span>))</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the final cloud-shadow mask to the image.</span></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img_cloud_shadow.addBands(is_cld_shdw)</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_cloud_layers(col, Map):</span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mosaic the image collection.</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> col.mosaic()</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Subset layers and prepare them for display.</span></span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>    clouds <span class="op">=</span> img.select(<span class="st">'clouds'</span>).selfMask()</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>    shadows <span class="op">=</span> img.select(<span class="st">'shadows'</span>).selfMask()</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>    dark_pixels <span class="op">=</span> img.select(<span class="st">'dark_pixels'</span>).selfMask()</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>    probability <span class="op">=</span> img.select(<span class="st">'probability'</span>)</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>    cloudmask <span class="op">=</span> img.select(<span class="st">'cloudmask'</span>).selfMask()</span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>    cloud_transform <span class="op">=</span> img.select(<span class="st">'cloud_transform'</span>)</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a map object.</span></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>    Map.centerObject(AOI, <span class="dv">12</span>)</span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add layers to the Google Earth Engine map.</span></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(img,</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>                 {<span class="st">'bands'</span>: [<span class="st">'B4'</span>, <span class="st">'B3'</span>, <span class="st">'B2'</span>], <span class="st">'min'</span>: <span class="dv">0</span>,</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'max'</span>: <span class="dv">2500</span>, <span class="st">'gamma'</span>: <span class="fl">1.1</span>},</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'S2 image'</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(probability,</span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>                 {<span class="st">'min'</span>: <span class="dv">0</span>, <span class="st">'max'</span>: <span class="dv">100</span>},</span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'probability (cloud)'</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(clouds,</span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>                 {<span class="st">'palette'</span>: [<span class="st">'e056fd'</span>]},</span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'clouds'</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(cloud_transform,</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>                 {<span class="st">'min'</span>: <span class="dv">0</span>, <span class="st">'max'</span>: <span class="dv">1</span>, <span class="st">'palette'</span>: [<span class="st">'white'</span>, <span class="st">'black'</span>]},</span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'cloud_transform'</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(dark_pixels,</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>                 {<span class="st">'palette'</span>: [<span class="st">'orange'</span>]},</span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'dark_pixels'</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(shadows, {<span class="st">'palette'</span>: [<span class="st">'yellow'</span>]},</span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'shadows'</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>    Map.addLayer(cloudmask, {<span class="st">'palette'</span>: [<span class="st">'orange'</span>]},</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'cloudmask'</span>, <span class="va">True</span>, <span class="fl">0.5</span>)</span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>s2_sr_cld_col_eval <span class="op">=</span> get_s2_sr_cld_col(AOI, START_DATE, END_DATE)</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>s2_sr_cld_col_eval_disp <span class="op">=</span> s2_sr_cld_col_eval.<span class="bu">map</span>(add_cld_shdw_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:53:17.020582Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:53:12.150547Z&quot;}" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Map <span class="op">=</span> geemap.Map()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>display_cloud_layers(s2_sr_cld_col_eval_disp, Map)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Map  <span class="co"># Display the map.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"f5d89bd78bc64139bb67eb2077a9abea","version_major":2,"version_minor":0}
+</script>
+</div>
+</div>
+<p>In case of bad internet / viewing in a repo - here is what the map looks like <img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
+<p><strong>Note: most preprocessing / spectral indices calculations can be easily performed using the eemont extension</strong> (as seen in the first GEE Example)</p>
+<p>Read more about these features in the <a href="https://eemont.readthedocs.io/en/latest/">eemont library’s documentation</a></p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:47:01.011424Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:47:00.992048Z&quot;}" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">'https://eemont.readthedocs.io/en/latest/#clouds-and-shadows-masking'</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
+
+        <iframe width="900" height="500" src="https://eemont.readthedocs.io/en/latest/#clouds-and-shadows-masking" frameborder="0" allowfullscreen=""></iframe>
+        
+</div>
+</div>
+<p>In case of bad internet / viewing in a repo - here is what the documentation looks like <img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
+</section>
+</section>
+<section id="processing-on-google-cloud" class="level3">
+<h3 class="anchored" data-anchor-id="processing-on-google-cloud">3. Processing on Google Cloud</h3>
+<p>Use Google Cloud via Google Earth Engine to run algorithms directly on large inputs (to save on data transfers and taking advantage of Google’s Cloud).</p>
+<ul>
+<li>Provided Statistical / Machine learning models</li>
+<li>Timeseries analysis (i.e.&nbsp;<a href="https://developers.google.com/earth-engine/apidocs/ee-algorithms-temporalsegmentation-ccdc">CCDC</a>)</li>
+<li>Sampling the data (i.e.&nbsp;<a href="https://developers.google.com/earth-engine/apidocs/ee-image-sample">by pixel</a>)</li>
+<li>Reduction operations (i.e.&nbsp;<a href="https://developers.google.com/earth-engine/apidocs/ee-imagecollection-reduce">to value</a>)</li>
+<li><a href="https://developers.google.com/earth-engine/apidocs/ee-image-expression">Pixel based aggregations</a></li>
+<li>Custom code running on a Google Cloud Platform (i.e.&nbsp;custom made Tensorflow models).</li>
+</ul>
+<p><strong>Note - these operations are performed asynchronously on automatically assigned Google Cloud platforms. Their speed will depend on general usage and the size of the task. Some tasks might fail, requiring reducing the area of interest / amount of images analysed to complete</strong></p>
+<section id="example-supervised-classification" class="level4">
+<h4 class="anchored" data-anchor-id="example-supervised-classification">Example: Supervised Classification</h4>
+<p>Based on <a href="https://developers.google.com/earth-engine/guides/classification">this tutorial</a></p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:55:00.651012Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:54:52.467119Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>LANDSAT_8 <span class="op">=</span> ee.ImageCollection(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>BIT_31 <span class="op">=</span> <span class="st">'11111'</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>DEC_31 <span class="op">=</span> <span class="bu">int</span>(BIT_31, <span class="dv">2</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function that scales and masks Landsat 8 surface reflectance images.</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prepSrL8(image):</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Develop masks for unwanted pixels (fill, cloud, cloud shadow).</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># https://www.usgs.gov/media/images/landsat-collection-2-pixel-quality-assessment-bit-index</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># image.select - Returns an image with the selected bands</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    qaMask <span class="op">=</span> image.select(<span class="st">'QA_PIXEL'</span>).bitwiseAnd(DEC_31).eq(<span class="dv">0</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># https://www.usgs.gov/landsat-missions/landsat-collection-2-quality-assessment-bands</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    saturationMask <span class="op">=</span> image.select(<span class="st">'QA_RADSAT'</span>).eq(<span class="dv">0</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    img_dict <span class="op">=</span> image.toDictionary()</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply the scaling factors to the appropriate bands.</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getFactorImg(factorNames):</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        factorList <span class="op">=</span> img_dict.select(factorNames).values()</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ee.Image.constant(factorList)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select accepts regular exceptions</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    scaleImg <span class="op">=</span> getFactorImg(</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        [<span class="st">'REFLECTANCE_MULT_BAND_.|TEMPERATURE_MULT_BAND_ST_B10'</span>])</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    offsetImg <span class="op">=</span> getFactorImg(</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        [<span class="st">'REFLECTANCE_ADD_BAND_.|TEMPERATURE_ADD_BAND_ST_B10'</span>])</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    scaled <span class="op">=</span> image.select(<span class="st">'SR_B.|ST_B10'</span>).multiply(scaleImg).add(offsetImg)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace original bands with scaled bands and apply masks.</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Image.addBands(srcImg, names, overwrite)</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image <span class="op">\</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>        .addBands(scaled, <span class="va">None</span>, <span class="va">True</span>) <span class="op">\</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>        .updateMask(qaMask) <span class="op">\</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>        .updateMask(saturationMask)</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>first_start_date <span class="op">=</span> <span class="st">'2021-03-01'</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>first_end_date <span class="op">=</span> <span class="st">'2021-07-01'</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>first_date_images <span class="op">=</span> LANDSAT_8.filterDate(first_start_date, first_end_date)</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a cloud-free Landsat 8 surface reflectance composite.</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>first_image <span class="op">=</span> first_date_images.<span class="bu">map</span>(prepSrL8).median()</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Use these bands for prediction.</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>rgb_bands <span class="op">=</span> [<span class="st">'SR_B4'</span>,  <span class="st">'SR_B3'</span>,  <span class="st">'SR_B2'</span>]</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>non_visual_wavelengths <span class="op">=</span> [<span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>]</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>temp_bands <span class="op">=</span> [<span class="st">'ST_B10'</span>]</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>wavelengths_with_temp_bands <span class="op">=</span> rgb_bands <span class="op">+</span> non_visual_wavelengths <span class="op">+</span> temp_bands</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="co"># SR_B2     Band 2 (blue) surface reflectance</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="co"># SR_B3     Band 3 (green) surface reflectance</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co"># SR_B4     Band 4 (red) surface reflectance</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co"># SR_B5     Band 5 (near infrared) surface reflectance</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co"># SR_B6     Band 6 (shortwave infrared 1) surface reflectance</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="co"># SR_B7     Band 7 (shortwave infrared 2) surface reflectance</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="co"># ST_B10    Band 10 surface temperature. If 'PROCESSING_LEVEL' is set to 'L2SR', this band is fully masked out.</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>first_prediction_bands <span class="op">=</span> first_image.select(wavelengths_with_temp_bands)</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Load training points. The numeric property 'class' stores known labels.</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> ee.FeatureCollection(<span class="st">'GOOGLE/EE/DEMOS/demo_landcover_labels'</span>)</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="co"># This property stores the land cover labels as consecutive integers starting from zero.</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>landcover_label <span class="op">=</span> <span class="st">'landcover'</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay the points on the imagery to get training.</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>first_training <span class="op">=</span> first_prediction_bands.sampleRegions(<span class="op">**</span>{</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">'collection'</span>: points,</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">'properties'</span>: [landcover_label],</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">'scale'</span>: <span class="dv">30</span></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Train a CART classifier with default parameters.</span></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>first_trained <span class="op">=</span> ee.Classifier.smileCart().train(</span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>    first_training, landcover_label, wavelengths_with_temp_bands)</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify the image with the same bands used for training.</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>first_classified <span class="op">=</span> first_image.select(</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>    wavelengths_with_temp_bands).classify(first_trained)</span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>ClassificationMap <span class="op">=</span> geemap.Map()</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the inputs and the results.</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>ClassificationMap.setCenter(<span class="op">-</span><span class="fl">122.0877</span>, <span class="fl">37.7880</span>, <span class="dv">11</span>)</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>ClassificationMap.addLayer(first_image,</span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>                           {<span class="st">'bands'</span>: rgb_bands, <span class="st">'min'</span>: <span class="dv">0</span>, <span class="st">'max'</span>: <span class="fl">0.25</span>},</span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>                           <span class="st">'sat-image'</span>)</span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>ClassificationMap.addLayer(first_classified,</span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>                           {<span class="st">'min'</span>: <span class="dv">0</span>, <span class="st">'max'</span>: <span class="dv">2</span>, <span class="st">'palette'</span>: [</span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'orange'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>]},</span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>                           <span class="st">'classification'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:53:54.271171Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:53:54.229063Z&quot;}" data-scrolled="true" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ClassificationMap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"12c6e403b3af4f409b5dec202343f9cb","version_major":2,"version_minor":0}
+</script>
+</div>
+</div>
+<p>In case of bad internet / viewing in a repo - here is what the map looks like <img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
+</section>
+</section>
+<section id="ending-a-display-data-on-google-earth-engine" class="level3">
+<h3 class="anchored" data-anchor-id="ending-a-display-data-on-google-earth-engine">Ending A: Display data on Google Earth Engine</h3>
+<p>In some cases, keeping our code and data on Google Earth Engine is enough, as the platform provides us with the ability to: - generate interactive maps with embedded layers and data - displayed in notebooks or using the JavaScript API - code apps running wholely on the Google Earth Engine plaform - only using the JavaScript API (i.e.&nbsp;<a href="https://parevalo_bu.users.earthengine.app/view/visualize-ccdc">CCDC Tools</a>, <a href="https://dynamicworld.app/explore">Dynamic World</a>)</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:31:52.668829Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:31:52.630602Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">'https://parevalo_bu.users.earthengine.app/view/visualize-ccdc'</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+
+        <iframe width="900" height="250" src="https://parevalo_bu.users.earthengine.app/view/visualize-ccdc" frameborder="0" allowfullscreen=""></iframe>
+        
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:26:05.433020Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:26:05.394466Z&quot;}" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">'https://dynamicworld.app/explore'</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+
+        <iframe width="900" height="350" src="https://dynamicworld.app/explore" frameborder="0" allowfullscreen=""></iframe>
+        
+</div>
+</div>
+<p>In case of bad internet / viewing in a repo - here is what the apps looks like <img src="gee-to-rasterio_files/figure-html/image-2.png" class="img-fluid" alt="image-2.png"></p>
+<section id="advantages" class="level4">
+<h4 class="anchored" data-anchor-id="advantages">Advantages:</h4>
+<ul>
+<li>Less code to handle</li>
+<li>Google provided basemap</li>
+<li>No additional costs for hosting / map access</li>
+</ul>
+</section>
+<section id="disadvantages" class="level4">
+<h4 class="anchored" data-anchor-id="disadvantages">Disadvantages:</h4>
+<ul>
+<li>Vendor lock-in</li>
+<li>Limited access to data outside the platform (mainly by uploading to GCS / Google Earth Engine directly)</li>
+<li>Requires using Google Cloud and learning Google Earth Engine APIs to run custom code</li>
+<li>UI is limited to Google Earth Engine APIs</li>
+<li>Licensing limitations due to code running on Google Platform</li>
+</ul>
+</section>
+</section>
+<section id="exporting-data" class="level3">
+<h3 class="anchored" data-anchor-id="exporting-data">4. Exporting data</h3>
+<p>Google Earth Engine provides library support to export the following: - Tables - data in columns and rows, i.e.&nbsp;CSV data - Images - 3D arrays of data (multiband images) with various data types and additional metadata - i.e.&nbsp;GeoTiff data - Maps - a rectangular pyramid of map tiles for use with web map viewers (images at different zoom levels).</p>
+<p>Data can be exported to - Google Earth Engine as assets - Google Drive as files - Google Cloud Storage as files on “bucket” storage (storage with no predefined size limit and apis used for ease in streaming the data). * Note: GeoTIFS in Google Cloud Storage can be read directly using the <code>ee.Image.loadGeoTIFF</code> static method (<a href="https://developers.google.com/earth-engine/apidocs/ee-image-loadgeotiff">docs</a>).</p>
+<section id="example-code-to-handle-exports" class="level4">
+<h4 class="anchored" data-anchor-id="example-code-to-handle-exports">Example: Code to Handle Exports</h4>
+<p>Based on <a href="https://colab.research.google.com/github/csaybar/EEwPython/blob/master/10_Export.ipynb">this tutorial</a></p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:34:36.767306Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:34:36.700183Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>one_hour_in_secs <span class="op">=</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">60</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> task_status(task_id):</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Fetches the current status of the task.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">      A dictionary describing the current status of the task as it appears on</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">      the EE server. Includes the following fields:</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">      - state: One of the values in Task.State.</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - creation_timestamp_ms: The Unix timestamp of when the task was created.</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - update_timestamp_ms: The Unix timestamp of when the task last changed.</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - output_url: URL of the output. Appears only if state is COMPLETED.</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - error_message: Failure reason. Appears only if state is FAILED.</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co">      May also include other fields.</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ee.data.getTaskStatus(task_id)[<span class="dv">0</span>]</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> result[<span class="st">'state'</span>] <span class="op">==</span> <span class="st">'UNKNOWN'</span>:</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        result[<span class="st">'state'</span>] <span class="op">=</span> ee.batch.Task.State.UNSUBMITTED</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_task_active(task_id):</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Returns whether the task is still running."""</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> task_status(task_id)[<span class="st">'state'</span>] <span class="kw">in</span> (ee.batch.Task.State.READY,</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>                                             ee.batch.Task.State.RUNNING,</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>                                             ee.batch.Task.State.CANCEL_REQUESTED)</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wait_for_task_to_finish(task, end_msg<span class="op">=</span><span class="st">""</span>):</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> task.active():</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Polling for task (id: </span><span class="sc">{}</span><span class="st">).'</span>.<span class="bu">format</span>(task.<span class="bu">id</span>))</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">5</span>)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> task.status()</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(status)</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (status[<span class="st">'state'</span>] <span class="op">!=</span> <span class="st">'FAILED'</span>):</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> end_msg:</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(end_msg)</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span>, status</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span>, status</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wait_for_task_id_to_finish(task_id, end_msg<span class="op">=</span><span class="st">""</span>):</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> is_task_active(task_id):</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Polling for task (id: </span><span class="sc">{}</span><span class="st">).'</span>.<span class="bu">format</span>(task_id))</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">5</span>)</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> task_status(task_id)</span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(status)</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (status[<span class="st">'state'</span>] <span class="op">!=</span> <span class="st">'FAILED'</span>):</span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> end_msg:</span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(end_msg)</span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span>, status</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Completed with status '</span><span class="sc">{</span>status<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span>, status</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_export_func_sync(export_func, table_output, output_filename, output_bucket):</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>    task <span class="op">=</span> export_func(table_output, output_filename, output_bucket)</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>    task.start()</span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>    wait_for_task_to_finish(</span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>        task, <span class="ss">f'Task </span><span class="sc">{</span>task<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> is done, saved to </span><span class="sc">{</span>output_filename<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:34:56.106806Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:34:56.097864Z&quot;}" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_export_image_to_storage_task(img_output, output_filename, output_bucket):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    image, region <span class="op">=</span> img_output</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Export a GeoTIF file to Cloud Storage.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ee.batch.Export.image.toCloudStorage(<span class="op">**</span>{</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'image'</span>: image,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'region'</span>:region,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'crs'</span>: <span class="st">'EPSG:4326'</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scale'</span>: <span class="dv">10</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'maxPixels'</span>:<span class="fl">1e13</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'bucket'</span>: output_bucket,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'fileNamePrefix'</span>: output_filename,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_export_table_to_storage_task(table_output, output_filename, output_bucket):</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Export a CSV file to Cloud Storage.</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ee.batch.Export.table.toCloudStorage(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        collection<span class="op">=</span>table_output,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        bucket<span class="op">=</span>output_bucket,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        fileNamePrefix<span class="op">=</span>output_filename,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="reading-cloud-images" class="level3">
+<h3 class="anchored" data-anchor-id="reading-cloud-images">5. Reading Cloud Images</h3>
+<section id="access-locally" class="level4">
+<h4 class="anchored" data-anchor-id="access-locally">Access Locally</h4>
+Copy images locally before processing (in case of a need for faster code access to the image, i.e.&nbsp;multiple reads of the whole image for analysis / usage in an ML model).
+<div style="display: flex; justify-content: space-around; align-items: center;">
+<p><img src="gee-to-rasterio_files/figure-html/image.png" width="30%"></p>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> rasterio.<span class="bu">open</span>(<span class="st">'data/RGB.byte.tif'</span>) <span class="im">as</span> dataset:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(dataset.profile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="access-remotely" class="level4">
+<h4 class="anchored" data-anchor-id="access-remotely">Access Remotely</h4>
+<p>Access images remotely via cloud (in case of less frequent read access / need for infrastructure flexibility, i.e a conversion pipeline or displaying the map - assuming data is saved in a “streamable” format - AKA <a href="http://www.cogeo.org/">Cloud Optimized GeoTiffs</a>).</p>
+<p><img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"> <a href="https://developers.planet.com/docs/planetschool/an-introduction-to-cloud-optimized-geotiffs-cogs-part-1-overview/">Image Source - planet.com</a></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> rasterio.<span class="bu">open</span>(<span class="st">"https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif"</span>) <span class="im">as</span> src:</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    show(src)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gdal-and-virtual-file-systems" class="level4">
+<h4 class="anchored" data-anchor-id="gdal-and-virtual-file-systems">GDAL and Virtual File Systems</h4>
+This flexibility in access is possible by using the Geospatial Data Abstraction Library - the de-facto standard for reading / writing raster data, and it’s support for <a href="https://gdal.org/user/virtual_file_systems.html">virtual file systems</a>. It also supports reading archived data.
+<div>
+<p><img src="gee-to-rasterio_files/figure-html/image.png" width="30%"></p>
+</div>
+</section>
+<section id="additional-read-methods" class="level4">
+<h4 class="anchored" data-anchor-id="additional-read-methods">Additional read methods</h4>
+<p>Some more read / write methods are demonstrated in <a href="https://gist.github.com/VehpuS/093904764cceb978b0ced9ebdae7d213">this gist</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image.png</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="ending-b-visualize-rasters" class="level3">
+<h3 class="anchored" data-anchor-id="ending-b-visualize-rasters">Ending B: Visualize Rasters</h3>
+<section id="serve-cogs-using-geoserver" class="level4">
+<h4 class="anchored" data-anchor-id="serve-cogs-using-geoserver">Serve COGs using GeoServer</h4>
+<p>http://geoserver.org/ https://github.com/geoserver/geoserver</p>
+<p>GeoServer is an open source server for sharing geospatial data. Designed for interoperability, it publishes data from any major spatial data source using open standards, including COGs:</p>
+<p>https://docs.geoserver.org/latest/en/user/community/cog/cog.html?highlight=geotiff</p>
+</section>
+<section id="serve-cogs-using-maptiler" class="level4">
+<h4 class="anchored" data-anchor-id="serve-cogs-using-maptiler">Serve COGs using MapTiler</h4>
+<p>https://www.maptiler.com/server/</p>
+<p>https://documentation.maptiler.com/hc/en-us/articles/4404732284305-Imagery-Hosting- GeoTIFF- MapTiler Server is software for self-hosting data produced by the MapTiler platform. Among other</p>
+<p>things, it can convert Shapefiles or raster images for super fast map loading, and serve pre- generated map tiles in GeoPackage or MBTiles format.</p>
+</section>
+<section id="custom-built-servers" class="level4">
+<h4 class="anchored" data-anchor-id="custom-built-servers">Custom Built Servers</h4>
+<p>Libraries that use GDAL as a low level layer for reading GeoTIFFs support streaming raster data from bucket storage and other remote sources, including various libraries used to create tile servers from GeoTIFFs.</p>
+<p>Many of the supported libraries are listed on the COG website: https://www.cogeo.org.</p>
+<p>For a easy to use Python based server, I recommend <a href="https://terracotta-python.readthedocs.io/en/latest/get-started.html">Terracotta</a>.</p>
+</section>
+</section>
+<section id="using-rasterio-for-raster-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="using-rasterio-for-raster-analysis">5. Using Rasterio for Raster Analysis</h3>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T14:00:41.531036Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T14:00:39.299503Z&quot;}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a geospatial dataset</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> rasterio.<span class="bu">open</span>(<span class="st">"https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;open DatasetReader name='https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif' mode='r'&gt;</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:39:09.064807Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:39:09.055566Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what is the name of this image</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>img_name <span class="op">=</span> dataset.name</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image filename: </span><span class="sc">{n}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(n<span class="op">=</span>img_name))</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># How many bands does this image have?</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>num_bands <span class="op">=</span> dataset.count</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Number of bands in image: </span><span class="sc">{n}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(n<span class="op">=</span>num_bands))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># How many rows and columns?</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> dataset.shape</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image size is: </span><span class="sc">{r}</span><span class="st"> rows x </span><span class="sc">{c}</span><span class="st"> columns</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(r<span class="op">=</span>rows, c<span class="op">=</span>cols))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Image filename: https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif
+
+Number of bands in image: 3
+
+Image size is: 25201 rows x 20179 columns
+</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:39:32.748610Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:39:32.738167Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does the raster have a description or metadata?</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>desc <span class="op">=</span> dataset.descriptions</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>metadata <span class="op">=</span> dataset.meta</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Raster description: </span><span class="sc">{desc}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(desc<span class="op">=</span>desc))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># What driver was used to open the raster?</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>driver <span class="op">=</span> dataset.driver</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Raster driver: </span><span class="sc">{d}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(d<span class="op">=</span>driver))</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the raster's projection?</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>proj <span class="op">=</span> dataset.crs</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image projection:'</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(proj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Raster description: (None, None, None)
+
+Raster driver: GTiff
+
+Image projection:
+EPSG:32759 
+</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:39:49.048609Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:39:49.038963Z&quot;}" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the raster's "geo-transform"</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gt <span class="op">=</span> dataset.transform</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image geo-transform:</span><span class="ch">\n</span><span class="sc">{gt}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(gt<span class="op">=</span>gt))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'All raster metadata:'</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(metadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Image geo-transform:
+| 0.04, 0.00, 229579.08|
+| 0.00,-0.04, 8057866.86|
+| 0.00, 0.00, 1.00|
+
+All raster metadata:
+{'driver': 'GTiff', 'dtype': 'uint8', 'nodata': None, 'width': 20179, 'height': 25201, 'count': 3, 'crs': CRS.from_epsg(32759), 'transform': Affine(0.0362, 0.0, 229579.08329,
+       0.0, -0.0362, 8057866.857120001)}</code></pre>
+</div>
+</div>
+<p>The rasterio Dataset object we created contains a lot of useful information but it is not directly used to read in the raster image. Instead we will need to access the raster’s bands using the read() method:</p>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:48:03.895152Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:48:03.858676Z&quot;}" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A window is a view onto a rectangular subset of a raster dataset and is described in rasterio by</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># column and row offsets and width and height in pixels. These may be ints or floats.</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterio.windows <span class="im">import</span> Window</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>row_start <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>row_stop <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>col_start <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>col_stop <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.from_slices((row_start, row_stop), (col_start, col_stop))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the second band in our image</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dataset.read(window<span class="op">=</span>window)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>data.shape <span class="co"># check out the dimensions of the image</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>(3, 1000, 1000)</code></pre>
+</div>
+</div>
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:49:26.350007Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:49:26.312782Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the image's datatypes?</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>datatype <span class="op">=</span> dataset.dtypes</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Band datatypes: </span><span class="sc">{dt}</span><span class="st">'</span>.<span class="bu">format</span>(dt<span class="op">=</span>datatype))</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># How about some image statistics?</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>image_mean <span class="op">=</span> np.mean(data)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>image_min <span class="op">=</span> np.amin(data)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>image_max <span class="op">=</span> np.amax(data)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>image_stddev <span class="op">=</span> np.std(data)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image range: </span><span class="sc">{minimum}</span><span class="st"> - </span><span class="sc">{maximum}</span><span class="st">'</span>.<span class="bu">format</span>(maximum<span class="op">=</span>image_max,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>                                                 minimum<span class="op">=</span>image_min))</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image mean, stddev: </span><span class="sc">{m}</span><span class="st">, </span><span class="sc">{s}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(m<span class="op">=</span>image_mean, s<span class="op">=</span>image_stddev))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Band datatypes: ('uint8', 'uint8', 'uint8')
+Image range: 0 - 0
+Image mean, stddev: 0.0, 0.0
+</code></pre>
+</div>
+</div>
+</section>
+<section id="ending-c-use-raster-data-as-input-for-further-computation" class="level3">
+<h3 class="anchored" data-anchor-id="ending-c-use-raster-data-as-input-for-further-computation">Ending C: Use Raster Data as Input for Further Computation</h3>
+<p>As you can see, reading rasterio data generates numpy arrays that can be processed in any Data Analysis / Machine Learning ecosystem. There is no “right” way to proceed - so either use libraries you have experience, or start from tutorials, such as:</p>
+<ul>
+<li>https://www.drivendata.co/blog/cloud-cover-benchmark/</li>
+<li>https://colab.research.google.com/github/ishgirwan/omdena_hdi/blob/master/training_model.ipynb#scrollTo=gsgOsjXXwWhp</li>
+</ul>
+</section>
+</section>
+<section id="resources-tutorials" class="level2">
+<h2 class="anchored" data-anchor-id="resources-tutorials">Resources / Tutorials</h2>
+<ul>
+<li><a href="https://geemap.org/usage/">GeeMap Library Documentation</a></li>
+<li><a href="https://eemont.readthedocs.io/en/latest/guide/index.html">Ee-mont User Guide</a></li>
+<li><a href="https://courses.spatialthoughts.com/end-to-end-gee.html">End-to-end GEE</a></li>
+<li><a href="https://github.com/patrickcgray/open-geo-tutorial">OpenGeo Tutorial</a></li>
+<li><a href="https://earthengine.googlesource.com/">Public GEE Repositories</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

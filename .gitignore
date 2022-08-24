@@ -1,4 +1,4 @@
-dev-env
+.venv
 __pycache__
 .ipynb_checkpoints
 .env
@@ -6,3 +6,5 @@ __pycache__
 .vi
 .vs
 *.tif
+
+/.quarto/

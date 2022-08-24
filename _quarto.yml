@@ -1,0 +1,38 @@
+ipynb-filters: [nbdev_filter]
+
+project:
+  type: website
+  output-dir: _docs
+  preview:
+    port: 3000
+    browser: false
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 4
+
+website:
+  title: "gee-to-rasterio-tutorial"
+  site-url: "https://VehpuS.github.io/gee-to-rasterio-tutorial"
+  description: "An interactive presentation / tutorial on geospatial analysis using Google Earth Engine and Rasterio"
+  twitter-card: true
+  open-graph: true
+  reader-mode: true
+  repo-branch: master
+  repo-url: "https://github.com/VehpuS/gee-to-rasterio-tutorial"
+  repo-actions: [issue]
+  navbar:
+    background: primary
+    search: true
+    right:
+      - icon: github
+        href: "https://github.com/VehpuS/gee-to-rasterio-tutorial"
+  sidebar:
+    style: "floating"
+
+metadata-files: 
+  - sidebar.yml
+  - custom.yml
