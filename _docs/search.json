@@ -37,14 +37,14 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Google Earth Engine to Rasterio",
+    "title": "About",
     "section": "",
     "text": "An interactive presentation / tutorial on geospatial analysis using Google Earth Engine and Rasterio"
   },
   {
     "objectID": "index.html#setting-up-the-notebooks-environment",
     "href": "index.html#setting-up-the-notebooks-environment",
-    "title": "Google Earth Engine to Rasterio",
+    "title": "About",
     "section": "Setting up the notebook’s environment",
     "text": "Setting up the notebook’s environment\n\nPython dependencies\nI recommend running in a virtual environment / colab.\n\npip install jupyter_contrib_nbextensions\npip install RISE\npip install geemap\npip install eemont\npip install autopep8\npip install rasterio\npip install numpy\npip install blockdiagMagic\n\n\nimport time\n\nfrom IPython.display import IFrame\n\n\n\nHow to view this notebook as a slide\nRerun jupyter notebook (via the web UI) after installing RISE, then you should see the following button, which opens the slideshow: \n\nPreview\n\n\n\nMore about slideshows in Jupyter\nHow to generate a slideshow from a notebook\nAdding Rise to be able to run slideshows from Jupyter\n\n\n\nIn Code Diagrams\nDiagrams should appear when Jupyter is run after the blockdiagMagic is installed.\n\nMore about the library\nGithub repo\n\n\nExample\n\n#Reset to png output with: %setdiagpng\n\n\nA -> B -> C;\nB -> D;"
   }

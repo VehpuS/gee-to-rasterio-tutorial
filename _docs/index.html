@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>gee-to-rasterio-tutorial - Google Earth Engine to Rasterio</title>
+<title>gee-to-rasterio-tutorial - About</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,9 +119,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="gee-to-rasterio-tutorial - Google Earth Engine to Rasterio">
+<meta property="og:title" content="gee-to-rasterio-tutorial - About">
 <meta property="og:site-name" content="gee-to-rasterio-tutorial">
-<meta name="twitter:title" content="gee-to-rasterio-tutorial - Google Earth Engine to Rasterio">
+<meta name="twitter:title" content="gee-to-rasterio-tutorial - About">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -158,7 +158,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Google Earth Engine to Rasterio</h1>
+      <h1 class="quarto-secondary-nav-title">About</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -173,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Google Earth Engine to Rasterio</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">About</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -212,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Google Earth Engine to Rasterio</h1>
+<h1 class="title d-none d-lg-block">About</h1>
 </div>
 
 
@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="python-dependencies" class="level3">
 <h3 class="anchored" data-anchor-id="python-dependencies">Python dependencies</h3>
 <p>I recommend running in a virtual environment / colab.</p>
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-19T05:06:46.500154Z&quot;,&quot;start_time&quot;:&quot;2022-06-19T05:06:19.761839Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter_contrib_nbextensions</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install RISE</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install geemap</span>
@@ -245,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install blockdiagMagic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:31:46.083565Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:31:46.034283Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="17">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -273,10 +273,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="example" class="level4">
 <h4 class="anchored" data-anchor-id="example">Example</h4>
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-08-24T13:43:26.847482Z&quot;,&quot;start_time&quot;:&quot;2022-08-24T13:43:26.833706Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="2">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-08-24T13:43:30.500954Z&quot;,&quot;start_time&quot;:&quot;2022-08-24T13:43:27.875869Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="3">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> C<span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">-&gt;</span> D<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
