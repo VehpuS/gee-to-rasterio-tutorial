@@ -284,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="python-dependencies" class="level3">
 <h3 class="anchored" data-anchor-id="python-dependencies">Python dependencies</h3>
 <p>I recommend running in a virtual environment / colab.</p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-19T05:06:46.500154Z&quot;,&quot;start_time&quot;:&quot;2022-06-19T05:06:19.761839Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter_contrib_nbextensions</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install RISE</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install geemap</span>
@@ -294,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install blockdiagMagic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:31:46.083565Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:31:46.034283Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -322,10 +322,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="example" class="level4">
 <h4 class="anchored" data-anchor-id="example">Example</h4>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-08-24T13:43:26.847482Z&quot;,&quot;start_time&quot;:&quot;2022-08-24T13:43:26.833706Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-08-24T13:43:30.500954Z&quot;,&quot;start_time&quot;:&quot;2022-08-24T13:43:27.875869Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> C<span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">-&gt;</span> D<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -338,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="google-earth-engine" class="level2">
 <h2 class="anchored" data-anchor-id="google-earth-engine">Google Earth Engine</h2>
 <p>Google earth engine combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities</p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:34:21.800621Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:33:24.581001Z&quot;}" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;fragment&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee, eemont, geemap</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Authenticate and Initialize Earth Engine and geemap.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ee.Authenticate()</span>
@@ -357,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Successfully saved authorization token.</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:34:30.570884Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:34:29.598103Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example point of interest to filter the image collection.</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> ee.Geometry.Point([<span class="op">-</span><span class="fl">75.92</span>, <span class="fl">2.86</span>])</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get and filter the Sentinel-2 Surface Reflectance image collection and filter it by region and time.</span></span>
@@ -366,7 +366,7 @@ Successfully saved authorization token.</code></pre>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cloud Probability masking is the default method to mask clouds and shadows in Sentinel-2 (method = 'cloud_prob'). By default, the Cloud Probability threshold is 60% (prob = 60).</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>S2c <span class="op">=</span> S2.maskClouds()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:37:40.351681Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:37:36.993589Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the visualization parameters.</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rgbUnscaled <span class="op">=</span> {<span class="st">'min'</span>:<span class="dv">0</span>, <span class="st">'max'</span>:<span class="dv">3000</span>, <span class="st">'bands'</span>:[<span class="st">'B4'</span>,<span class="st">'B3'</span>,<span class="st">'B2'</span>]}</span>
@@ -387,7 +387,7 @@ Successfully saved authorization token.</code></pre>
 <h2 class="anchored" data-anchor-id="rasterio">Rasterio</h2>
 <p>Rasterio reads and writes geospatial raster data.</p>
 <p>Geographic information systems use GeoTIFF and other formats to organize and store gridded, or raster, datasets. Rasterio reads and writes these formats and provides a Python API based on N-D arrays.</p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:37:59.454642Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:34:57.864063Z&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterio.plot <span class="im">import</span> show</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -402,11 +402,11 @@ Successfully saved authorization token.</code></pre>
 <section id="high-level---remote-sensing-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="high-level---remote-sensing-pipeline">High Level - Remote Sensing Pipeline</h2>
 <p>I’ll be giving the hight level data flow with small demonstrate in code - with the goal of providing an easy starting point to fill the “pipeline” with steps relevant to individual projects.</p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-27T18:30:25.111598Z&quot;,&quot;start_time&quot;:&quot;2022-06-27T18:30:25.091041Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hide the input for the diagram after coding</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hide_input="true">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T21:48:56.210886Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T21:48:56.139561Z&quot;}" data-hide_input="true" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Get input data"</span> <span class="op">-&gt;</span> <span class="st">"Preprocess data"</span> <span class="op">-&gt;</span> <span class="st">"""Google Earth Engine</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">Processing"""</span> <span class="op">-&gt;</span> <span class="st">"Exporting data"</span> <span class="op">-&gt;</span> <span class="st">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Rasterio Raster Analysis"</span> <span class="op">-&gt;</span> <span class="st">"Further Computation"</span><span class="op">;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""Google Earth Engine</span></span>
@@ -416,7 +416,7 @@ Successfully saved authorization token.</code></pre>
 <p><img src="gee-to-rasterio_files/figure-html/cell-12-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-hide_input="true">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T21:48:35.442254Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T21:48:35.387285Z&quot;}" data-hide_input="true" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Get input data"</span> <span class="op">-&gt;</span> <span class="st">"Preprocess data"</span> <span class="op">-&gt;</span> <span class="st">"""Google Earth Engine</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">Processing"""</span> <span class="op">-&gt;</span> <span class="st">"..."</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""Google Earth Engine</span></span>
@@ -425,7 +425,7 @@ Successfully saved authorization token.</code></pre>
 <p><img src="gee-to-rasterio_files/figure-html/cell-13-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-hide_input="true">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T21:47:37.740242Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T21:47:37.689320Z&quot;}" data-hide_input="true" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Exporting data"</span> <span class="op">-&gt;</span> <span class="st">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Rasterio Raster Analysis"</span> <span class="op">-&gt;</span> <span class="st">"Further Computation"</span><span class="op">;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">"Reading Cloud Images"</span> <span class="op">-&gt;</span> <span class="st">"Visualize Rasters"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -502,7 +502,7 @@ Successfully saved authorization token.</code></pre>
 <section id="example-s2-preprocessing" class="level4">
 <h4 class="anchored" data-anchor-id="example-s2-preprocessing">Example: S2 Preprocessing</h4>
 <p>Based on <a href="https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless">this tutorial</a></p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T19:47:42.430706Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T19:47:42.364653Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>AOI <span class="op">=</span> ee.Geometry.Point([<span class="op">-</span><span class="fl">75.92</span>, <span class="fl">2.86</span>]).<span class="bu">buffer</span>(<span class="dv">100</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>START_DATE <span class="op">=</span> <span class="st">'2020-01-01'</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>END_DATE <span class="op">=</span> <span class="st">'2021-01-01'</span></span>
@@ -637,7 +637,7 @@ Successfully saved authorization token.</code></pre>
 <span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>s2_sr_cld_col_eval_disp <span class="op">=</span> s2_sr_cld_col_eval.<span class="bu">map</span>(add_cld_shdw_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:53:17.020582Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:53:12.150547Z&quot;}" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Map <span class="op">=</span> geemap.Map()</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>display_cloud_layers(s2_sr_cld_col_eval_disp, Map)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Map  <span class="co"># Display the map.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -650,9 +650,9 @@ Successfully saved authorization token.</code></pre>
 <p>In case of bad internet / viewing in a repo - here is what the map looks like <img src="gee-to-rasterio_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
 <p><strong>Note: most preprocessing / spectral indices calculations can be easily performed using the eemont extension</strong> (as seen in the first GEE Example)</p>
 <p>Read more about these features in the <a href="https://eemont.readthedocs.io/en/latest/">eemont library’s documentation</a></p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:47:01.011424Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:47:00.992048Z&quot;}" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">'https://eemont.readthedocs.io/en/latest/#clouds-and-shadows-masking'</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="52">
 
         <iframe width="900" height="500" src="https://eemont.readthedocs.io/en/latest/#clouds-and-shadows-masking" frameborder="0" allowfullscreen=""></iframe>
         
@@ -676,7 +676,7 @@ Successfully saved authorization token.</code></pre>
 <section id="example-supervised-classification" class="level4">
 <h4 class="anchored" data-anchor-id="example-supervised-classification">Example: Supervised Classification</h4>
 <p>Based on <a href="https://developers.google.com/earth-engine/guides/classification">this tutorial</a></p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T13:55:00.651012Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T13:54:52.467119Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>LANDSAT_8 <span class="op">=</span> ee.ImageCollection(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>BIT_31 <span class="op">=</span> <span class="st">'11111'</span></span>
@@ -771,7 +771,7 @@ Successfully saved authorization token.</code></pre>
 <span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'orange'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>]},</span>
 <span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>                           <span class="st">'classification'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:53:54.271171Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:53:54.229063Z&quot;}" data-scrolled="true" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ClassificationMap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
@@ -785,17 +785,17 @@ Successfully saved authorization token.</code></pre>
 <section id="ending-a-display-data-on-google-earth-engine" class="level3">
 <h3 class="anchored" data-anchor-id="ending-a-display-data-on-google-earth-engine">Ending A: Display data on Google Earth Engine</h3>
 <p>In some cases, keeping our code and data on Google Earth Engine is enough, as the platform provides us with the ability to: - generate interactive maps with embedded layers and data - displayed in notebooks or using the JavaScript API - code apps running wholely on the Google Earth Engine plaform - only using the JavaScript API (i.e.&nbsp;<a href="https://parevalo_bu.users.earthengine.app/view/visualize-ccdc">CCDC Tools</a>, <a href="https://dynamicworld.app/explore">Dynamic World</a>)</p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T21:31:52.668829Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T21:31:52.630602Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">'https://parevalo_bu.users.earthengine.app/view/visualize-ccdc'</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="18">
 
         <iframe width="900" height="250" src="https://parevalo_bu.users.earthengine.app/view/visualize-ccdc" frameborder="0" allowfullscreen=""></iframe>
         
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:26:05.433020Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:26:05.394466Z&quot;}" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">'https://dynamicworld.app/explore'</span>, width<span class="op">=</span><span class="dv">900</span>, height<span class="op">=</span><span class="dv">350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="44">
 
         <iframe width="900" height="350" src="https://dynamicworld.app/explore" frameborder="0" allowfullscreen=""></iframe>
         
@@ -828,7 +828,7 @@ Successfully saved authorization token.</code></pre>
 <section id="example-code-to-handle-exports" class="level4">
 <h4 class="anchored" data-anchor-id="example-code-to-handle-exports">Example: Code to Handle Exports</h4>
 <p>Based on <a href="https://colab.research.google.com/github/csaybar/EEwPython/blob/master/10_Export.ipynb">this tutorial</a></p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:34:36.767306Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:34:36.700183Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;skip&quot;}" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>one_hour_in_secs <span class="op">=</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">60</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -897,7 +897,7 @@ Successfully saved authorization token.</code></pre>
 <span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>    wait_for_task_to_finish(</span>
 <span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>        task, <span class="ss">f'Task </span><span class="sc">{</span>task<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss"> is done, saved to </span><span class="sc">{</span>output_filename<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-24T18:34:56.106806Z&quot;,&quot;start_time&quot;:&quot;2022-06-24T18:34:56.097864Z&quot;}" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_export_image_to_storage_task(img_output, output_filename, output_bucket):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    image, region <span class="op">=</span> img_output</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Export a GeoTIF file to Cloud Storage.</span></span>
@@ -981,7 +981,7 @@ This flexibility in access is possible by using the Geospatial Data Abstraction 
 </section>
 <section id="using-rasterio-for-raster-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="using-rasterio-for-raster-analysis">5. Using Rasterio for Raster Analysis</h3>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-07-26T14:00:41.531036Z&quot;,&quot;start_time&quot;:&quot;2022-07-26T14:00:39.299503Z&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a geospatial dataset</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> rasterio.<span class="bu">open</span>(<span class="st">"https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif"</span>)</span>
@@ -990,7 +990,7 @@ This flexibility in access is possible by using the Geospatial Data Abstraction 
 <pre><code>&lt;open DatasetReader name='https://oin-hotosm.s3.amazonaws.com/56f9b5a963ebf4bc00074e70/0/56f9c2d42b67227a79b4faec.tif' mode='r'&gt;</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:39:09.064807Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:39:09.055566Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what is the name of this image</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>img_name <span class="op">=</span> dataset.name</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Image filename: </span><span class="sc">{n}</span><span class="ch">\n</span><span class="st">'</span>.<span class="bu">format</span>(n<span class="op">=</span>img_name))</span>
@@ -1011,7 +1011,7 @@ Image size is: 25201 rows x 20179 columns
 </code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:39:32.748610Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:39:32.738167Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does the raster have a description or metadata?</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>desc <span class="op">=</span> dataset.descriptions</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>metadata <span class="op">=</span> dataset.meta</span>
@@ -1036,7 +1036,7 @@ EPSG:32759
 </code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:39:49.048609Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:39:49.038963Z&quot;}" data-scrolled="true" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the raster's "geo-transform"</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gt <span class="op">=</span> dataset.transform</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1056,7 +1056,7 @@ All raster metadata:
 </div>
 </div>
 <p>The rasterio Dataset object we created contains a lot of useful information but it is not directly used to read in the raster image. Instead we will need to access the raster’s bands using the read() method:</p>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:48:03.895152Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:48:03.858676Z&quot;}" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A window is a view onto a rectangular subset of a raster dataset and is described in rasterio by</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># column and row offsets and width and height in pixels. These may be ints or floats.</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterio.windows <span class="im">import</span> Window</span>
@@ -1069,11 +1069,11 @@ All raster metadata:
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the second band in our image</span></span>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dataset.read(window<span class="op">=</span>window)</span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>data.shape <span class="co"># check out the dimensions of the image</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>(3, 1000, 1000)</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2022-06-28T19:49:26.350007Z&quot;,&quot;start_time&quot;:&quot;2022-06-28T19:49:26.312782Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the image's datatypes?</span></span>
