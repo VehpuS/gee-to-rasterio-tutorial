@@ -3,3 +3,7 @@ website:
     contents:
       - index.ipynb
       - gee-to-rasterio.ipynb
+      - section: docs
+        contents:
+          - docs/index.html
+          - docs/gee-to-rasterio.html

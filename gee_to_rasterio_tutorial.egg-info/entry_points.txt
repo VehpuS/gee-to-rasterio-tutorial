@@ -1,0 +1,6 @@
+[console_scripts]
+
+
+[nbdev]
+gee_to_rasterio_tutorial = gee_to_rasterio_tutorial._modidx:d
+
