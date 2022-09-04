@@ -7,9 +7,7 @@ About
 > Google Earth Engine and Rasterio
 > <a href="https://colab.research.google.com/github/VehpuS/gee-to-rasterio-tutorial/blob/main/gee-to-rasterio.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-## Setting up the notebook’s environment
-
-### Python dependencies
+## Python dependencies
 
 I recommend running in a virtual environment / colab.
 
@@ -22,43 +20,20 @@ pip install autopep8
 pip install rasterio
 pip install numpy
 pip install blockdiagMagic
+pip install nbdev
 ```
 
-``` python
-import time
-
-from IPython.display import IFrame
-```
-
-### How to view this notebook as a slide
-
-Rerun jupyter notebook (via the web UI) after installing RISE, then you
-should see the following button, which opens the slideshow:
-![image.png](index_files/figure-gfm/image.png)
-
-#### Preview
-
-<video alt="Slides Preview" src="presentation-movie.mov" width="100%" autoplay controls />
-
-#### More about slideshows in Jupyter
-
-[How to generate a slideshow from a
-notebook](https://towardsdatascience.com/5-slides-for-tips-on-presentation-mode-in-jupyter-notebook-f858b15fff4f#:~:text=The%20first%20step%20is%20to,Slideshow%20option%20and%20continue%20reading.&text=Each%20cell%20in%20the%20Jupyter,in%20the%20upper%2Dright%20corner.)
-
-[Adding Rise to be able to run slideshows from
-Jupyter](https://rise.readthedocs.io/en/stable/)
-
-### In Code Diagrams
+## In Code Diagrams
 
 Diagrams should appear when Jupyter is run after the `blockdiagMagic` is
 installed.
 
-#### More about the library
+### More about the library
 
 [Github
 repo](https://github.com/innovationOUtside/ipython_magic_blockdiag)
 
-#### Example
+### Example
 
 ``` python
 #Reset to png output with: %setdiagpng
@@ -69,4 +44,27 @@ A -> B -> C;
 B -> D;
 ```
 
-![](index_files/figure-gfm/cell-6-output-1.svg)
+![](index_files/figure-gfm/cell-5-output-1.svg)
+
+## How to view this notebook as a slide
+
+Rerun jupyter notebook (via the web UI) after installing RISE, then you
+should see the following button, which opens the slideshow:
+![image.png](index_files/figure-gfm/image.png)
+
+### Preview
+
+<!-- <video alt="Slides Preview" src="presentation-movie.mov" width="100%" autoplay controls /> -->
+<video alt="Slides Preview" src="https://github.com/VehpuS/gee-to-rasterio-tutorial/blob/main/presentation-movie.mov?raw=true" width="100%" autoplay controls />
+
+### More about slideshows in Jupyter
+
+[How to generate a slideshow from a
+notebook](https://towardsdatascience.com/5-slides-for-tips-on-presentation-mode-in-jupyter-notebook-f858b15fff4f#:~:text=The%20first%20step%20is%20to,Slideshow%20option%20and%20continue%20reading.&text=Each%20cell%20in%20the%20Jupyter,in%20the%20upper%2Dright%20corner.)
+
+[Adding Rise to be able to run slideshows from
+Jupyter](https://rise.readthedocs.io/en/stable/)
+
+## Generate Docs Website
+
+`nbdev_docs`
