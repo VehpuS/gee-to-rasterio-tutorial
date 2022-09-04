@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.163">
+<meta name="generator" content="quarto-1.1.149">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -125,8 +125,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="gee-to-rasterio-tutorial - About">
+<meta property="og:description" content="I recommend running in a virtual environment / colab.">
 <meta property="og:site-name" content="gee-to-rasterio-tutorial">
 <meta name="twitter:title" content="gee-to-rasterio-tutorial - About">
+<meta name="twitter:description" content="I recommend running in a virtual environment / colab.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -188,22 +190,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./gee-to-rasterio.html" class="sidebar-item-text sidebar-link">Google Earth Engine to Rasterio</a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">docs</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  docs/index.html
-  </li>
-          <li class="sidebar-item">
-  docs/gee-to-rasterio.html
-  </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -213,20 +199,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setting-up-the-notebooks-environment" id="toc-setting-up-the-notebooks-environment" class="nav-link active" data-scroll-target="#setting-up-the-notebooks-environment">Setting up the notebook’s environment</a>
-  <ul>
-  <li><a href="#python-dependencies" id="toc-python-dependencies" class="nav-link" data-scroll-target="#python-dependencies">Python dependencies</a></li>
-  <li><a href="#how-to-view-this-notebook-as-a-slide" id="toc-how-to-view-this-notebook-as-a-slide" class="nav-link" data-scroll-target="#how-to-view-this-notebook-as-a-slide">How to view this notebook as a slide</a>
-  <ul class="collapse">
-  <li><a href="#preview" id="toc-preview" class="nav-link" data-scroll-target="#preview">Preview</a></li>
-  <li><a href="#more-about-slideshows-in-jupyter" id="toc-more-about-slideshows-in-jupyter" class="nav-link" data-scroll-target="#more-about-slideshows-in-jupyter">More about slideshows in Jupyter</a></li>
-  </ul></li>
+  <li><a href="#python-dependencies" id="toc-python-dependencies" class="nav-link active" data-scroll-target="#python-dependencies">Python dependencies</a></li>
   <li><a href="#in-code-diagrams" id="toc-in-code-diagrams" class="nav-link" data-scroll-target="#in-code-diagrams">In Code Diagrams</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#more-about-the-library" id="toc-more-about-the-library" class="nav-link" data-scroll-target="#more-about-the-library">More about the library</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul></li>
+  <li><a href="#how-to-view-this-notebook-as-a-slide" id="toc-how-to-view-this-notebook-as-a-slide" class="nav-link" data-scroll-target="#how-to-view-this-notebook-as-a-slide">How to view this notebook as a slide</a>
+  <ul>
+  <li><a href="#preview" id="toc-preview" class="nav-link" data-scroll-target="#preview">Preview</a></li>
+  <li><a href="#more-about-slideshows-in-jupyter" id="toc-more-about-slideshows-in-jupyter" class="nav-link" data-scroll-target="#more-about-slideshows-in-jupyter">More about slideshows in Jupyter</a></li>
   </ul></li>
+  <li><a href="#generate-docs-website" id="toc-generate-docs-website" class="nav-link" data-scroll-target="#generate-docs-website">Generate Docs Website</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/VehpuS/gee-to-rasterio-tutorial/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -253,10 +237,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p>An interactive presentation / tutorial on geospatial analysis using Google Earth Engine and Rasterio <a href="https://colab.research.google.com/github/VehpuS/gee-to-rasterio-tutorial/blob/main/gee-to-rasterio.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 </blockquote>
-<section id="setting-up-the-notebooks-environment" class="level2">
-<h2 class="anchored" data-anchor-id="setting-up-the-notebooks-environment">Setting up the notebook’s environment</h2>
-<section id="python-dependencies" class="level3">
-<h3 class="anchored" data-anchor-id="python-dependencies">Python dependencies</h3>
+<section id="python-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="python-dependencies">Python dependencies</h2>
 <p>I recommend running in a virtual environment / colab.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyter_contrib_nbextensions</span>
@@ -266,50 +248,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install autopep8</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rasterio</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install blockdiagMagic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install blockdiagMagic</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install nbdev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="how-to-view-this-notebook-as-a-slide" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-view-this-notebook-as-a-slide">How to view this notebook as a slide</h3>
+<section id="in-code-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="in-code-diagrams">In Code Diagrams</h2>
+<p>Diagrams should appear when Jupyter is run after the <code>blockdiagMagic</code> is installed.</p>
+<section id="more-about-the-library" class="level3">
+<h3 class="anchored" data-anchor-id="more-about-the-library">More about the library</h3>
+<p><a href="https://github.com/innovationOUtside/ipython_magic_blockdiag">Github repo</a></p>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> C<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">-&gt;</span> D<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-5-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="how-to-view-this-notebook-as-a-slide" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-view-this-notebook-as-a-slide">How to view this notebook as a slide</h2>
 <p>Rerun jupyter notebook (via the web UI) after installing RISE, then you should see the following button, which opens the slideshow: <img src="index_files/figure-html/image.png" class="img-fluid" alt="image.png"></p>
-<section id="preview" class="level4">
-<h4 class="anchored" data-anchor-id="preview">Preview</h4>
-<video alt="Slides Preview" src="presentation-movie.mov" width="100%" autoplay="" controls="">
+<section id="preview" class="level3">
+<h3 class="anchored" data-anchor-id="preview">Preview</h3>
+<!-- <video alt="Slides Preview" src="presentation-movie.mov" width="100%" autoplay controls /> -->
+<video alt="Slides Preview" src="https://github.com/VehpuS/gee-to-rasterio-tutorial/blob/main/presentation-movie.mov?raw=true" width="100%" autoplay="" controls="">
 </video></section>
-<section id="more-about-slideshows-in-jupyter" class="level4">
-<h4 class="anchored" data-anchor-id="more-about-slideshows-in-jupyter">More about slideshows in Jupyter</h4>
+<section id="more-about-slideshows-in-jupyter" class="level3">
+<h3 class="anchored" data-anchor-id="more-about-slideshows-in-jupyter">More about slideshows in Jupyter</h3>
 <p><a href="https://towardsdatascience.com/5-slides-for-tips-on-presentation-mode-in-jupyter-notebook-f858b15fff4f#:~:text=The%20first%20step%20is%20to,Slideshow%20option%20and%20continue%20reading.&amp;text=Each%20cell%20in%20the%20Jupyter,in%20the%20upper%2Dright%20corner.">How to generate a slideshow from a notebook</a></p>
 <p><a href="https://rise.readthedocs.io/en/stable/">Adding Rise to be able to run slideshows from Jupyter</a></p>
 </section>
 </section>
-<section id="in-code-diagrams" class="level3">
-<h3 class="anchored" data-anchor-id="in-code-diagrams">In Code Diagrams</h3>
-<p>Diagrams should appear when Jupyter is run after the <code>blockdiagMagic</code> is installed.</p>
-<section id="more-about-the-library" class="level4">
-<h4 class="anchored" data-anchor-id="more-about-the-library">More about the library</h4>
-<p><a href="https://github.com/innovationOUtside/ipython_magic_blockdiag">Github repo</a></p>
-</section>
-<section id="example" class="level4">
-<h4 class="anchored" data-anchor-id="example">Example</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reset to png output with: %setdiagpng</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-&gt;</span> B <span class="op">-&gt;</span> C<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">-&gt;</span> D<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-6-output-1.svg" class="img-fluid"></p>
-</div>
-</div>
+<section id="generate-docs-website" class="level2">
+<h2 class="anchored" data-anchor-id="generate-docs-website">Generate Docs Website</h2>
+<p><code>nbdev_docs</code></p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

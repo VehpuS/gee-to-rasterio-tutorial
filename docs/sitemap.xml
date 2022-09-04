@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://VehpuS.github.io/gee-to-rasterio-tutorial/ADDITIONAL_THOUGHTS.html</loc>
+    <lastmod>2022-09-04T14:53:30.243Z</lastmod>
+  </url>
+  <url>
     <loc>https://VehpuS.github.io/gee-to-rasterio-tutorial/gee-to-rasterio.html</loc>
-    <lastmod>2022-08-30T08:53:57.825Z</lastmod>
+    <lastmod>2022-09-04T14:53:32.513Z</lastmod>
   </url>
   <url>
     <loc>https://VehpuS.github.io/gee-to-rasterio-tutorial/index.html</loc>
-    <lastmod>2022-08-30T08:53:59.085Z</lastmod>
+    <lastmod>2022-09-04T14:53:33.026Z</lastmod>
   </url>
 </urlset>
